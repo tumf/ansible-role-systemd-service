@@ -1,0 +1,7 @@
+---
+# tasks file for roles/systemd/service
+- template: src="default.j2" dest="/etc/default/{{ systemd_service_name }}"
+  notify: reload systemd
+- template: src="service.j2" dest="/etc/systemd/system/{{ systemd_service_name }}.service"
+  notify: reload systemd
+- service: name="{{ systemd_service_name }}" state=started enabled=yes

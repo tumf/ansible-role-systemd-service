@@ -1,0 +1,18 @@
+[Unit]
+Description={{ systemd_service_Unit_Description }}
+Requires={{ systemd_service_Unit_Requires }}
+After={{ systemd_service_Unit_After }}
+
+[Service]
+Type={{ systemd_service_Service_Type }}
+EnvironmentFile=-/etc/default/{{ systemd_service_name }}
+{% if systemd_service_Service_ExecStartPre is defined %}{% for i in systemd_service_Service_ExecStartPre %}
+ExecStartPre={{ i }}
+{% endfor %}{% endif %}
+ExecStart={{ systemd_service_Service_ExecStart }}
+{% if systemd_service_ExecStartPost is defined %}{% for i in systemd_service_ExecStartPost %}
+ExecStartPost={{ i }}
+{% endfor %}{% endif  %}
+
+[Install]
+WantedBy={{ systemd_service_Install_WantedBy }}
