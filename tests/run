@@ -3,18 +3,25 @@
 cases="case-1"
 errors=0
 
-for case in $cases;
+for case in $cases
 do
-    out=$(ansible-playbook ./test/site.yml -i ./test/hosts -t $case -D -e systemd_service_root_dir=$case)
+    out=$(ansible-playbook ./tests/site.yml -i ./tests/hosts -t $case -D -e systemd_service_root_dir=$case)
     result=$?
-    if echo $out|tail -n 2 |grep " changed=0 " >/dev/null;then
+    if echo $out|tail -n 2 |grep " changed=0 " >/dev/null
+    then
         echo -n "."
     else
         echo $case
-        echo 
+        echo
         echo "$out"
         errors=$(( errors+1 ))
     fi
 done
-echo
+
+if [ $errors -eq 0 ]
+then
+    echo "ok"
+else
+    echo "${errors} error(s)"
+fi
 exit $errors
