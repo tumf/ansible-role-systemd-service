@@ -9,4 +9,4 @@
 - template: src="service.j2" dest="{{ systemd_service_root_dir }}/{{ systemd_service_systemd_dir }}/{{ systemd_service_name }}.service"
   notify: reload systemd
 - service: name="{{ systemd_service_name }}" state=started enabled=yes
-  when: not test
+  when: not ansible_unit_test

@@ -5,7 +5,7 @@
   tags:
     - minimum
   vars:
-    test: True
+    ansible_unit_test: True
   roles:
     - role: systemd-service
       systemd_service_name: "min"
@@ -16,7 +16,7 @@
   tags:
     - swarm-manager
   vars:
-    test: True
+    ansible_unit_test: True
   roles:
     - role: systemd-service
       systemd_service_name: "swarm-manager"
