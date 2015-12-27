@@ -1,4 +1,6 @@
-systemd-service
+[![Build Status](https://travis-ci.org/tumf/ansible-role-systemd-service.svg)](https://travis-ci.org/tumf/ansible-role-systemd-service)
+
+systemd-service - Ansible role
 ===============
 
 Register services to systemd.
