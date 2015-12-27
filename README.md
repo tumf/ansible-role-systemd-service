@@ -5,6 +5,9 @@ systemd-service - Ansible role
 
 Register services to systemd.
 
+> **Japanese Manual is here**
+> http://qiita.com/tumf/items/9d5ac6853685ba53214d
+
 
 Install
 -------
