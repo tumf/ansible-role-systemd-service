@@ -1,5 +1,5 @@
 ---
 # defaults file for roles/systemd/service
-systemd_service_Unit_Description: "{{ systemd_service_name }} Service deployed by systemd/service role of Ansible."
+systemd_service_Unit_Description: "{{ systemd_service_name }} Service"
 systemd_service_Service_Type: simple
 systemd_service_Install_WantedBy: multi-user.target
