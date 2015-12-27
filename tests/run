@@ -1,6 +1,11 @@
 #!/bin/bash
 
+# default test cases
 cases="case-1"
+
+if [ ! -z $1 ];then
+    cases=$1
+fi
 errors=0
 
 for case in $cases
@@ -20,7 +25,7 @@ done
 
 if [ $errors -eq 0 ]
 then
-    echo "ok"
+    echo " ok"
 else
     echo "${errors} error(s)"
 fi
