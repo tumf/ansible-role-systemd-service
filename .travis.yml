@@ -4,6 +4,7 @@ python:
 - '2.7'
 install:
 - pip install ansible
+#- ansible-galaxy install -r tests/requirements.yml -p tests/roles
 before_script:
 - ansible --version
 - ansible-playbook --syntax-check ./tests/site.yml -i ./tests/hosts
