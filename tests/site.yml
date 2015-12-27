@@ -7,7 +7,7 @@
   vars:
     ansible_unit_test: True
   roles:
-    - role: systemd-service
+    - role: ../..
       systemd_service_name: "min"
       systemd_service_Service_ExecStart: /sbin/ping 127.0.0.1
 
@@ -18,7 +18,7 @@
   vars:
     ansible_unit_test: True
   roles:
-    - role: systemd-service
+    - role: ../..
       systemd_service_name: "swarm-manager"
       systemd_service_envs:
         - "DOCKER_HOST=tcp://127.0.0.1:2375"
