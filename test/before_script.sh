@@ -9,3 +9,5 @@ for dir in "defaults handlers meta tasks templates";
 do
     cp -pR ${dir} ${role_dir}
 done
+
+mkdir -p /etc/systemd/system /etc/default 
