@@ -2,6 +2,8 @@
   connection: local
   sudo: yes
   user: travis
+  tags:
+    - case-1
   roles:
     - role: systemd-service
       systemd_service_name: "swarm-manager"
@@ -14,4 +16,5 @@
         - -/usr/bin/docker stop swarm-manager
         - -/usr/bin/docker rm swarm-manager
         - /usr/bin/docker pull swarm
-      systemd_service_Service_ExecStart: /usr/bin/docker run -p 2377:2375 --name swarm-manager swarm manage
+      systemd_service_Service_ExecStart: |
+        /usr/bin/docker run -p 2377:2375 --name swarm-manager swarm manage
