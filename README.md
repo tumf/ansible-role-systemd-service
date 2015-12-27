@@ -5,26 +5,36 @@ systemd-service - Ansible role
 
 Register services to systemd.
 
-Requirements
-------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Install
+-------
+
+    $ ansible-galaxy install tumf.systemd-service
+
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+|name                |type    |default|description
+|--------------------|--------|-------|-------------
+|systemd_service_root_dir|String|""|directory prefix
+|systemd_service_default_dir|String|"/etc/default"|envs file paht
+|systemd_service_systemd_dir|String|"/etc/systemd/system"|systemd path
+|systemd_service_name*|String||service name
+|systemd_service_envs|Array|[]|envs (/etc/default/:name)
+|systemd_service_Unit_Description|String||[Unit]Description
+|systemd_service_Unit_Requires|String||[Unit]Requires
+|systemd_service_Unit_After|String||[Unit]After
+|systemd_service_Service_Type|String|"simple"|[Service]Type
+|systemd_service_Service_ExecStartPre|Array||[Service]ExecStartPre
+|systemd_service_Service_ExecStart★|String||[Service]ExecStart
+|systemd_service_Service_ExecStartPost|Array||[Service]ExecStartPost
+|systemd_service_Install_WantedBy|String|"multi-user.target"|[Install]WantedBy
 
-Dependencies
-------------
-
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+> * Required
 
 Example Playbook
 ----------------
-
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
 
     - hosts: servers
       roles:
