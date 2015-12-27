@@ -1,0 +1,15 @@
+[Unit]
+Description=swarm-manager Service
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=simple
+EnvironmentFile=-/etc/default/swarm-manager
+ExecStartPre=-/usr/bin/docker stop "swarm-manager"
+ExecStartPre=-/usr/bin/docker rm  "swarm-manager"
+ExecStartPre=/usr/bin/docker pull "swarm"
+ExecStart=/usr/bin/docker run -p 2377:2375  --name swarm-manager swarm manage --replication --advertise=10.10.40.91:2375 consul://10.10.40.81:8500/swarm/nodes
+
+[Install]
+WantedBy=multi-user.target

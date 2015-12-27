@@ -1,0 +1,14 @@
+---
+language: python
+sudo: true
+python:
+  - "2.7"
+install:
+  - pip install ansible
+before_script:
+  - ansible --version
+  - sh ./test/before_script.sh
+script:
+  - ansible-playbook --syntax-check ./test/1/site.yml -i ./test/hosts
+  - ansible-playbook ./test/1/site.yml -i ./test/hosts
+  - sh ./test/1/test.sh
