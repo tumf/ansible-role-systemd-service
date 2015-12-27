@@ -1,9 +1,10 @@
+
 - hosts: 127.0.0.1
   connection: local
-  sudo: yes
-  user: travis
   tags:
     - case-1
+  vars:
+    test: True
   roles:
     - role: systemd-service
       systemd_service_name: "swarm-manager"

@@ -1,7 +1,12 @@
 ---
 # tasks file for roles/systemd/service
-- template: src="default.j2" dest="/etc/default/{{ systemd_service_name }}"
+- file: state=directory path="{{ item }}" recurse=yes
+  with_items:
+    - "{{ systemd_service_root_dir }}{{ systemd_service_default_dir }}"
+    - "{{ systemd_service_root_dir }}{{ systemd_service_systemd_dir }}"
+- template: src="default.j2" dest="{{ systemd_service_root_dir }}/{{ systemd_service_default_dir }}/{{ systemd_service_name }}"
   notify: reload systemd
-- template: src="service.j2" dest="/etc/systemd/system/{{ systemd_service_name }}.service"
+- template: src="service.j2" dest="{{ systemd_service_root_dir }}/{{ systemd_service_systemd_dir }}/{{ systemd_service_name }}.service"
   notify: reload systemd
 - service: name="{{ systemd_service_name }}" state=started enabled=yes
+  when: not test
