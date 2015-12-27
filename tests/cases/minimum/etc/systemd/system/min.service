@@ -1,0 +1,10 @@
+[Unit]
+Description=min Service
+
+[Service]
+Type=simple
+EnvironmentFile=-/etc/default/min
+ExecStart=/sbin/ping 127.0.0.1
+
+[Install]
+WantedBy=multi-user.target

@@ -1,8 +1,27 @@
 #!/bin/bash
 
-# default test cases
-cases="case-1"
+usage_exit() {
+        echo "Usage: $0 [-w] name" 1>&2
+        exit 1
+}
 
+check="-C"
+while getopts wh option
+do
+    case $option in
+        w)
+            check=""
+            ;;
+        h)
+            usage_exit
+            ;;
+    esac
+done
+
+shift $((OPTIND - 1))
+
+mkdir -p tests/cases
+cases=$(ls tests/cases)
 if [ ! -z $1 ];then
     cases=$1
 fi
@@ -10,9 +29,9 @@ errors=0
 
 for case in $cases
 do
-    out=$(ansible-playbook ./tests/site.yml -i ./tests/hosts -t $case -D -e systemd_service_root_dir=$case)
+    out=$(ansible-playbook ./tests/site.yml -i ./tests/hosts -t $case -D $check -e systemd_service_root_dir="cases/${case}")
     result=$?
-    if echo $out|tail -n 2 |grep " changed=0 " >/dev/null
+    if echo $out|tail -n 1 |grep -E "changed=0\s+unreachable=0\s+failed=0" >/dev/null
     then
         echo -n "."
     else

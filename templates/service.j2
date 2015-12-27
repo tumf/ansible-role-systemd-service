@@ -1,7 +1,11 @@
 [Unit]
 Description={{ systemd_service_Unit_Description }}
+{% if systemd_service_Unit_Requires is defined %}
 Requires={{ systemd_service_Unit_Requires }}
+{% endif %}
+{% if systemd_service_Unit_After is defined %}
 After={{ systemd_service_Unit_After }}
+{% endif %}
 
 [Service]
 Type={{ systemd_service_Service_Type }}
