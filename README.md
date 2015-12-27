@@ -1,7 +1,7 @@
-Role Name
-=========
+systemd-service
+===============
 
-A brief description of the role goes here.
+Register services to systemd.
 
 Requirements
 ------------
@@ -26,7 +26,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-        - role: systemd/service
+        - role: systemd-service
           systemd_service_name: "swarm-manager"
           systemd_service_envs:
               - "DOCKER_HOST=tcp://127.0.0.1:2375"
@@ -42,9 +42,9 @@ Including an example of how to use your role (for instance, with variables passe
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+> @tumf
