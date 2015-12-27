@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: tumf
-  description:
+  description: Register services to systemd.
   issue_tracker_url: https://github.com/tumf/ansible-role-systemd-service/issues
   license: MIT
   min_ansible_version: 1.2
