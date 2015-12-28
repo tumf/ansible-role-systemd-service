@@ -22,7 +22,7 @@ Role Variables
 |name                |type    |default|description
 |--------------------|--------|-------|-------------
 |systemd_service_root_dir|String|""|directory prefix
-|systemd_service_default_dir|String|"/etc/default"|envs file paht
+|systemd_service_default_dir|String|"/etc/default"|envs file path
 |systemd_service_systemd_dir|String|"/etc/systemd/system"|systemd path
 |systemd_service_name*|String||service name
 |systemd_service_envs|Array|[]|envs (/etc/default/:name)
