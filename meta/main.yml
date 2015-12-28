@@ -8,7 +8,27 @@ galaxy_info:
   platforms:
   - name: Ubuntu
     versions:
+    - vivid
     - wily
+  - name: EL
+    versions:
+    - 7
+  - name: SLES
+    versions:
+    - 12
+  - name: Debian
+    versions:
+    - jessie
+  - name: Fedora
+    versions:
+    - 15
+    - 16
+    - 17
+    - 18
+    - 19
+    - 20
+    - 21
+    - 22
   categories:
   - system
 dependencies: []
