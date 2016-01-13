@@ -6,9 +6,10 @@ install:
 #- ansible-galaxy install -r tests/requirements.yml -p tests/roles
 before_script:
 - ansible --version
-- ansible-playbook --syntax-check ./tests/site.yml -i ./tests/hosts
+- cd tests
+- ansible-playbook --syntax-check site.yml -i hosts
 script:
-- ./tests/run
+- run
 notifications:
   slack:
     secure: Pre+jUSJzmO8MCjuj57soV1rBnvOtnL+wEvdkhPE9rMbEpsQ2dDRsSwtlCMDuspAWPj7Cbjmzo6SKwlNqWkPfKGzowVwC+5RK7ZbcXaO2uUjdQXVOJpg/x4AgvDLVKlkQUbuplfSjRgYoKA1gkUe8CLxmnbOjR8DcnZZCd5uX8v0qmnDdPNID19W8KlORVMxzEichGKE2Mj34wcVNLX8+mZYyoT18gOF3oHGFosfsel3B1HMdEWxQeb7kkbQKtypwfn70MlTE1qFzMfg6/4zNsOgBgYTpAG4QaflAG0+HW+12JzhWJa1mnbxjC2Aj9yiEaU1EfXYR5hrR37z3QOezQZD5DtJNV0s4mpDgK6jUt0K6UXN0VGEvmMh80vj1CHSzxGpLboo3qa+HXxIMGrcd4qDOFop/BR8PfNDh0VtrH7lolMXjExvE/9hZ8sC0PER/KXL1Yvop+KH1usDKWQlMrgMuYe40Ja3bIW7AO81rWxktnZ8kAhT7Bp2AvTaCTCnWozlW9gnjpVZvXI4x0UQnpr1drt28qH8KFyWkWZR0Ay6uGXkssD4Lc978vhh7Ze+e+yLRVs3XqdPE/R+xQeNJWHkmSPPT7gNoYFRmBoF2nPG/dtPCtaxQiY5uRi2X9begC6XoiFJIXpsoDLq82Il48lW3xgi/1ROhcs/z3yWP+w=

@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ -f tests/site.yml ];then
+    cd tests
+fi
+
 usage_exit() {
         echo "Usage: $0 [-w] name" 1>&2
         exit 1
@@ -20,8 +24,8 @@ done
 
 shift $((OPTIND - 1))
 
-mkdir -p tests/cases
-cases=$(ls tests/cases)
+mkdir -p cases
+cases=$(ls cases)
 if [ ! -z $1 ];then
     cases=$1
 fi
@@ -29,7 +33,7 @@ errors=0
 
 for case in $cases
 do
-    out=$(ansible-playbook ./tests/site.yml -i ./tests/hosts -t $case -D $check -e systemd_service_root_dir="cases/${case}")
+    out=$(ansible-playbook site.yml -i hosts -t $case -D $check -e systemd_service_root_dir="cases/${case}")
     result=$?
     if echo $out|tail -n 1 |grep -E "changed=0\s+unreachable=0\s+failed=0" >/dev/null
     then
