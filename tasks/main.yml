@@ -2,13 +2,13 @@
 # tasks file for roles/systemd/service
 - file: state=directory path="{{ item }}" recurse=yes
   with_items:
-    - "{{ systemd_service_root_dir }}{{ systemd_service_default_dir }}"
-    - "{{ systemd_service_root_dir }}{{ systemd_service_systemd_dir }}"
+    - "{{ ansible_unit_test_prefix_dir }}{{ systemd_service_default_dir }}"
+    - "{{ ansible_unit_test_prefix_dir }}{{ systemd_service_systemd_dir }}"
 
-- template: src="default.j2" dest="{{ systemd_service_root_dir }}/{{ systemd_service_default_dir }}/{{ systemd_service_name }}"
+- template: src="default.j2" dest="{{ ansible_unit_test_prefix_dir }}/{{ systemd_service_default_dir }}/{{ systemd_service_name }}"
   notify: reload systemd
 
-- template: src="service.j2" dest="{{ systemd_service_root_dir }}/{{ systemd_service_systemd_dir }}/{{ systemd_service_name }}.service"
+- template: src="service.j2" dest="{{ ansible_unit_test_prefix_dir }}/{{ systemd_service_systemd_dir }}/{{ systemd_service_name }}.service"
   register: service_file
   notify: reload systemd
 
