@@ -6,7 +6,7 @@ install:
 #- ansible-galaxy install -r tests/requirements.yml -p tests/roles
 before_script:
 - ansible --version
-- cd tests && ansible-playbook --syntax-check site.yml -i hosts
+- cd tests && ansible-playbook --syntax-check test.yml -i hosts
 script:
 - cd tests; ./run
 notifications:
