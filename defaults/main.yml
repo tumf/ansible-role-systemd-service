@@ -1,9 +1,9 @@
 ---
 # defaults file for roles/systemd/service
 ansible_unit_test: False
-ansible_unit_test_dir: ""
+ansible_unit_test_prefix_dir: ""
 
-systemd_service_root_dir: "{{ ansible_unit_test_dir }}"
+systemd_service_root_dir: "{{ ansible_unit_test_prefix_dir }}"
 systemd_service_default_dir: "/etc/default"
 systemd_service_systemd_dir: "/etc/systemd/system"
 systemd_service_envs: []
