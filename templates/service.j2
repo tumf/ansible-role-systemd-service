@@ -1,22 +1,105 @@
 [Unit]
 Description={{ systemd_service_Unit_Description }}
+
+{% if systemd_service_Unit_Documentation is defined %}
+Documentation={{ systemd_service_Unit_Documentation }}
+{% endif -%}
+
 {% if systemd_service_Unit_Requires is defined %}
+{% if systemd_service_Unit_Requires is string %}
 Requires={{ systemd_service_Unit_Requires }}
+{% else %}
+Requires={{ systemd_service_Unit_Requires | join(",") }}
 {% endif %}
+{% endif -%}
+
+{% if systemd_service_Unit_Wants is defined %}
+{% if systemd_service_Unit_Wants is string %}
+Wants={{ systemd_service_Unit_Wants }}
+{% else %}
+Wants={{ systemd_service_Unit_Wants | join(",") }}
+{% endif %}
+{% endif -%}
+
+{% if systemd_service_Unit_Before is defined %}
+{% if systemd_service_Unit_Before is string %}
+Before={{ systemd_service_Unit_Before }}
+{% else %}
+Before={{ systemd_service_Unit_Before | join(",") }}
+{% endif %}
+{% endif -%}
+
 {% if systemd_service_Unit_After is defined %}
+{% if systemd_service_Unit_After is string %}
 After={{ systemd_service_Unit_After }}
+{% else %}
+After={{ systemd_service_Unit_After | join(",") }}
 {% endif %}
+{% endif -%}
 
 [Service]
-Type={{ systemd_service_Service_Type }}
-EnvironmentFile=-/etc/default/{{ systemd_service_name }}
-{% if systemd_service_Service_ExecStartPre is defined %}{% for i in systemd_service_Service_ExecStartPre %}
-ExecStartPre={{ i }}
-{% endfor %}{% endif %}
 ExecStart={{ systemd_service_Service_ExecStart }}
-{% if systemd_service_ExecStartPost is defined %}{% for i in systemd_service_ExecStartPost %}
+EnvironmentFile=-/etc/default/{{ systemd_service_name }}
+Type={{ systemd_service_Service_Type }}
+
+{% if systemd_service_ExecReload is defined %}
+ExecReload={{ systemd_service_ExecReload }}
+{% endif -%}
+
+{% if systemd_service_Service_ExecStop is defined %}
+Service_ExecStop={{ systemd_service_Service_ExecStop }}
+{% endif -%}
+
+{% if systemd_service_Service_ExecStartPre is defined %}
+{% if systemd_service_Service_ExecStartPre is string %}
+ExecStartPre={{ systemd_service_Service_ExecStartPre }}
+{% elif systemd_service_Service_ExecStartPre is iterable %}
+{% for i in systemd_service_Service_ExecStartPre %}
+ExecStartPre={{ i }}
+{% endfor %}
+{% endif %}
+{% endif -%}
+
+{% if systemd_service_Service_ExecStartPost is defined -%}
+{% if systemd_service_Service_ExecStartPost is string -%}
+ExecStartPost={{ systemd_service_Service_ExecStartPost }}
+{% elif systemd_service_Service_ExecStartPost is iterable -%}
+{% for i in systemd_service_Service_ExecStartPost -%}
 ExecStartPost={{ i }}
-{% endfor %}{% endif  %}
+{% endfor %}
+{% endif %}
+{% endif -%}
+
+{% if systemd_service_Service_ExecStopPost is defined %}
+ExecStopPost={{ systemd_service_Service_ExecStopPost }}
+{% endif -%}
+
+{% if systemd_service_Service_PIDFile is defined %}
+Service_PIDFile={{ systemd_service_Service_PIDFile }}
+{% endif %}
+{% if systemd_service_Service_BusName is defined %}
+BusName={{ systemd_service_Service_BusName }}
+{% endif %}
+{% if systemd_service_Service_Restart is defined %}
+Restart={{ systemd_service_Service_Restart }}
+{% endif %}
+{% if systemd_service_Service_PrivateTmp is defined %}
+Service_PrivateTmp={{ systemd_service_Service_PrivateTmp }}
+{% endif -%}
 
 [Install]
+{% if systemd_service_Install_WantedBy is defined %}
 WantedBy={{ systemd_service_Install_WantedBy }}
+{% endif -%}
+
+{% if systemd_service_Install_RequiredBy is defined %}
+RequiredBy={{ systemd_service_Install_RequiredBy }}
+{% endif -%}
+
+{% if systemd_service_Install_Also is defined %}
+Also={{ systemd_service_Install_Also }}
+{% endif -%}
+
+{% if systemd_service_Install_Alias is defined %}
+Alias={{ systemd_service_Install_Alias }}
+{% endif %}

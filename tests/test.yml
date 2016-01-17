@@ -1,0 +1,86 @@
+---
+
+- hosts: 127.0.0.1
+  connection: local
+  tags:
+    - minimum
+  vars:
+    ansible_unit_test: True
+  roles:
+    - role: ../..
+      systemd_service_name: "min"
+      systemd_service_Service_ExecStart: /sbin/ping 127.0.0.1
+
+- hosts: 127.0.0.1
+  connection: local
+  tags:
+    - swarm-manager
+  vars:
+    ansible_unit_test: True
+  roles:
+    - role: ../..
+      systemd_service_name: "swarm-manager"
+      systemd_service_envs:
+        - "DOCKER_HOST=tcp://127.0.0.1:2375"
+      systemd_service_Unit_Description: Docker Swarm Manager
+      systemd_service_Unit_Requires: docker.service
+      systemd_service_Unit_After: docker.service
+      systemd_service_Service_ExecStartPre:
+        - -/usr/bin/docker stop swarm-manager
+        - -/usr/bin/docker rm swarm-manager
+        - /usr/bin/docker pull swarm
+      systemd_service_Service_ExecStart: |
+        /usr/bin/docker run -p 2377:2375 --name swarm-manager swarm manage
+
+- hosts: 127.0.0.1
+  connection: local
+  tags:
+    - full
+  vars:
+    ansible_unit_test: True
+  roles:
+    - role: ../..
+      systemd_service_default_dir: /etc/hoge
+      systemd_service_systemd_dir: /etc/fuga
+      systemd_service_name: full
+      systemd_service_envs:
+        - abc=def
+        - 123=256
+      systemd_service_Unit_Description: full oiptions test
+      systemd_service_Unit_Documentation: This is a test of full options.
+      systemd_service_Unit_Requires: req1
+      systemd_service_Unit_Wants:
+        - wants
+      systemd_service_Unit_After: after
+      systemd_service_Unit_Before: before
+      systemd_service_Service_Type: type
+      systemd_service_Service_ExecStartPre: start pre
+      systemd_service_Service_ExecStart: start command
+      systemd_service_Service_ExecStartPost:
+        - start post 1
+        - start post 2
+      systemd_service_Service_Restart: restart
+      systemd_service_Service_ExecReload: reload
+      systemd_service_Service_ExecStop: stop
+      systemd_service_Service_ExecStopPost: stop post
+      systemd_service_Service_PIDFile: pid
+      systemd_service_Service_BusName: bus
+      systemd_service_Service_PrivateTmp: tmp
+      systemd_service_Install_WantedBy: wantedby
+      systemd_service_Install_RequiredBy: requiredby
+      systemd_service_Install_Also: also
+      systemd_service_Install_Alias: alias
+
+- hosts: 127.0.0.1
+  connection: local
+  tags:
+    - mapping
+  vars:
+    ansible_unit_test: True
+  roles:
+    - role: ../..
+      systemd_service_name: "min"
+      systemd_service_Service_ExecStart: /sbin/ping 127.0.0.1
+      systemd_service_envs:
+        - abc: def
+        - 123: 256

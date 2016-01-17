@@ -21,19 +21,56 @@ Role Variables
 
 |name                |type    |default|description
 |--------------------|--------|-------|-------------
-|systemd_service_root_dir|String|""|directory prefix
-|systemd_service_default_dir|String|"/etc/default"|envs file path
-|systemd_service_systemd_dir|String|"/etc/systemd/system"|systemd path
-|systemd_service_name*|String||service name
-|systemd_service_envs|Array|[]|envs (/etc/default/:name)
-|systemd_service_Unit_Description|String||[Unit]Description
-|systemd_service_Unit_Requires|String||[Unit]Requires
-|systemd_service_Unit_After|String||[Unit]After
-|systemd_service_Service_Type|String|"simple"|[Service]Type
-|systemd_service_Service_ExecStartPre|Array||[Service]ExecStartPre
-|systemd_service_Service_ExecStart★|String||[Service]ExecStart
-|systemd_service_Service_ExecStartPost|Array||[Service]ExecStartPost
-|systemd_service_Install_WantedBy|String|"multi-user.target"|[Install]WantedBy
+|`systemd_service_default_dir`|String|"/etc/default"|envs file path
+|`systemd_service_systemd_dir`|String|"/etc/systemd/system"|systemd path
+|`systemd_service_name` * |String||service name
+|`systemd_service_envs`|String,List,MapList|[]|envs (/etc/default/:name)
+
+> **Note**
+> `systemd_service_root_dir` is obsolate.
+
+
+### [Unit]
+
+
+|name                |type    |default|description
+|--------------------|--------|-------|-------------
+|`systemd_service_Unit_Description`|String||[Unit]Description
+|`systemd_service_Unit_Documentation`|String||[Unit]Documentation
+|`systemd_service_Unit_Requires`|String,List||[Unit]Requires
+|`systemd_service_Unit_Wants`|String,List||[Unit]Wants
+|`systemd_service_Unit_After`|String,List||[Unit]After
+|`systemd_service_Unit_Before`|String,List||[Unit]Before
+
+
+### [Service]
+
+
+|name                |type    |default|description
+|--------------------|--------|-------|-------------
+|`systemd_service_Service_Type`|String|"simple"|[Service]Type
+|`systemd_service_Service_ExecStartPre`|String,List||[Service]ExecStartPre
+|`systemd_service_Service_ExecStart` * |String||[Service]ExecStart
+|`systemd_service_Service_ExecStartPost`|String,List||[Service]ExecStartPost
+|`systemd_service_Service_Restart`|String|"no"| [Service]Restart "no" or "always" or "on-success" or "on-failure"
+|`systemd_service_Service_ExecReload`|String|| [Service]ExecReload
+|`systemd_service_Service_ExecStop`|String|| [Service]ExecStop
+|`systemd_service_Service_ExecStopPost`|String,List|| [Service]ExecStopPost
+|`systemd_service_Service_PIDFile`|String|| [Service]PIDFile
+|`systemd_service_Service_BusName`|String|| [Service]BusName
+|`systemd_service_Service_PrivateTmp`|String|| [Service]PrivateTmp
+
+
+
+### [Install]
+
+|name                |type    |default|description
+|--------------------|--------|-------|-------------
+|`systemd_service_Install_WantedBy`|String|[Install]WantedBy "multi-user.target"|[Install]WantedBy
+|`systemd_service_Install_RequiredBy`|String||[Install]RequiredBy
+|`systemd_service_Install_Also`|String||[Install]Also
+|`systemd_service_Install_Alias`|String||[Install]Alias
+
 
 > * Required
 

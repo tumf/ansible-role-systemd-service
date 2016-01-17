@@ -4,13 +4,17 @@ usage_exit() {
         echo "Usage: $0 [-w] name" 1>&2
         exit 1
 }
+user=$(id -un)
+group=$(id -gn)
+ansible_opts="-e ansible_unit_test=true -e ansible_unit_test_user=$user -e ansible_unit_test_group=$group"
 
-check="-C"
+outputs="outputs"
+
 while getopts wh option
 do
     case $option in
         w)
-            check=""
+            outputs="cases"
             ;;
         h)
             usage_exit
@@ -20,31 +24,42 @@ done
 
 shift $((OPTIND - 1))
 
-mkdir -p tests/cases
-cases=$(ls tests/cases)
+[ -f tests/test.yml ] && cd tests
+
+cases=$(ls cases)
 if [ ! -z $1 ];then
     cases=$1
 fi
+
 errors=0
+passes=0
 
 for case in $cases
 do
-    out=$(ansible-playbook ./tests/site.yml -i ./tests/hosts -t $case -D $check -e systemd_service_root_dir="cases/${case}")
-    result=$?
-    if echo $out|tail -n 1 |grep -E "changed=0\s+unreachable=0\s+failed=0" >/dev/null
-    then
-        echo -n "."
+    rm -rf ${outputs}/${case}
+done
+
+mkdir -p cases ${outputs}
+for case in $cases
+do
+    echo "* Test: $case"
+    ansible-playbook ./test.yml -i 127.0.0.1, -t $case-setup -e ansible_unit_test_prefix_dir="${outputs}/${case}" -e prefix_dir="${outputs}/${case}" ${ansible_opts} >/dev/null
+    ansible-playbook ./test.yml -i 127.0.0.1, -t $case -e ansible_unit_test_prefix_dir="${outputs}/${case}" -e prefix_dir="${outputs}/${case}" ${ansible_opts} || exit 255
+
+
+    if diff -uNr cases/${case} ${outputs}/${case} >/dev/null 2>&1 ;then
+        passes=$(( passes+1 ))
+        echo "TestCase: $case OK"
     else
-        echo $case
-        echo
-        echo "$out"
+        diff -uNr cases/${case} ${outputs}/${case}
         errors=$(( errors+1 ))
+        echo "TestCase: $case ERROR"
     fi
 done
 
 if [ $errors -eq 0 ]
 then
-    echo " ok"
+    echo "${passes} test case(s) passed"
 else
     echo "${errors} error(s)"
 fi
