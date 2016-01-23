@@ -2,11 +2,18 @@ language: python
 python:
   - '2.7'
 env:
-#  - ANSIBLE_VERSION=1.7.2
+  - ANSIBLE_VERSION=1.6
+  - ANSIBLE_VERSION=1.7.2
   - ANSIBLE_VERSION=1.8
   - ANSIBLE_VERSION=1.8.4
   - ANSIBLE_VERSION=1.9.4
   - ANSIBLE_VERSION=2.0.0.2
+
+matrix:
+  allow_failures:
+    - env: ANSIBLE_VERSION=1.7.2
+    - env: ANSIBLE_VERSION=1.6
+
 install:
   - pip install ansible==$ANSIBLE_VERSION
 #- ansible-galaxy install -r tests/requirements.yml -p tests/roles
