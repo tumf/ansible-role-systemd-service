@@ -42,6 +42,13 @@ ExecStart={{ systemd_service_Service_ExecStart }}
 EnvironmentFile=-/etc/default/{{ systemd_service_name }}
 Type={{ systemd_service_Service_Type }}
 
+{% if systemd_service_Service_User is defined %}
+User={{ systemd_service_Service_User }}
+{% endif -%}
+{% if systemd_service_Service_User is defined %}
+Group={{ systemd_service_Service_User }}
+{% endif -%}
+
 {% if systemd_service_ExecReload is defined %}
 ExecReload={{ systemd_service_ExecReload }}
 {% endif -%}
