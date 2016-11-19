@@ -21,7 +21,6 @@ galaxy_info:
     - jessie
   - name: Fedora
     versions:
-    - 15
     - 16
     - 17
     - 18
