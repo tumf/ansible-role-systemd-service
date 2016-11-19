@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/tumf/ansible-role-systemd-service.svg)](https://travis-ci.org/tumf/ansible-role-systemd-service)
-[![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-systemd--service-blue.svg)](https://galaxy.ansible.com/list#/roles/6664)
+[![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-systemd--service-blue.svg)](https://galaxy.ansible.com/tumf/systemd-service/)
 
 systemd-service - Ansible role
 ===============
