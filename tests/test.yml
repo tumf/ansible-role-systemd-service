@@ -60,6 +60,7 @@
         - start post 1
         - start post 2
       systemd_service_Service_Restart: restart
+      systemd_service_Service_RestartSec: 10
       systemd_service_Service_ExecReload: reload
       systemd_service_Service_ExecStop: stop
       systemd_service_Service_ExecStopPost: stop post

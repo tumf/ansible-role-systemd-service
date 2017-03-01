@@ -53,6 +53,7 @@ Role Variables
 |`systemd_service_Service_ExecStart` * |String||[Service]ExecStart
 |`systemd_service_Service_ExecStartPost`|String,List||[Service]ExecStartPost
 |`systemd_service_Service_Restart`|String|"no"| [Service]Restart "no" or "always" or "on-success" or "on-failure"
+|`systemd_service_Service_RestartSec`|Integer|| [Service]RestartSec
 |`systemd_service_Service_ExecReload`|String|| [Service]ExecReload
 |`systemd_service_Service_ExecStop`|String|| [Service]ExecStop
 |`systemd_service_Service_ExecStopPost`|String,List|| [Service]ExecStopPost
