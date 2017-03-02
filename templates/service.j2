@@ -90,6 +90,9 @@ BusName={{ systemd_service_Service_BusName }}
 {% if systemd_service_Service_Restart is defined %}
 Restart={{ systemd_service_Service_Restart }}
 {% endif %}
+{% if systemd_service_Service_RestartSec is defined %}
+RestartSec={{ systemd_service_Service_RestartSec }}
+{% endif %}
 {% if systemd_service_Service_PrivateTmp is defined %}
 Service_PrivateTmp={{ systemd_service_Service_PrivateTmp }}
 {% endif -%}
