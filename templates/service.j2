@@ -54,7 +54,7 @@ ExecReload={{ systemd_service_ExecReload }}
 {% endif -%}
 
 {% if systemd_service_Service_ExecStop is defined %}
-Service_ExecStop={{ systemd_service_Service_ExecStop }}
+ExecStop={{ systemd_service_Service_ExecStop }}
 {% endif -%}
 
 {% if systemd_service_Service_ExecStartPre is defined %}
