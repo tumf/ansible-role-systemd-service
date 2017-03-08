@@ -54,7 +54,7 @@ ExecReload={{ systemd_service_ExecReload }}
 {% endif -%}
 
 {% if systemd_service_Service_ExecStop is defined %}
-Service_ExecStop={{ systemd_service_Service_ExecStop }}
+ExecStop={{ systemd_service_Service_ExecStop }}
 {% endif -%}
 
 {% if systemd_service_Service_ExecStartPre is defined %}
@@ -82,7 +82,7 @@ ExecStopPost={{ systemd_service_Service_ExecStopPost }}
 {% endif -%}
 
 {% if systemd_service_Service_PIDFile is defined %}
-Service_PIDFile={{ systemd_service_Service_PIDFile }}
+PIDFile={{ systemd_service_Service_PIDFile }}
 {% endif %}
 {% if systemd_service_Service_BusName is defined %}
 BusName={{ systemd_service_Service_BusName }}
@@ -94,7 +94,7 @@ Restart={{ systemd_service_Service_Restart }}
 RestartSec={{ systemd_service_Service_RestartSec }}
 {% endif %}
 {% if systemd_service_Service_PrivateTmp is defined %}
-Service_PrivateTmp={{ systemd_service_Service_PrivateTmp }}
+PrivateTmp={{ systemd_service_Service_PrivateTmp }}
 {% endif -%}
 
 [Install]
