@@ -10,6 +10,7 @@ galaxy_info:
     versions:
     - vivid
     - wily
+    - xenial
   - name: EL
     versions:
     - 7
