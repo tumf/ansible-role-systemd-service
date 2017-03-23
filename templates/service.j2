@@ -48,6 +48,9 @@ User={{ systemd_service_Service_User }}
 {% if systemd_service_Service_Group is defined %}
 Group={{ systemd_service_Service_Group }}
 {% endif -%}
+{% if systemd_service_Service_WorkingDirectory is defined %}
+WorkingDirectory={{ systemd_service_Service_WorkingDirectory }}
+{% endif -%}
 
 {% if systemd_service_ExecReload is defined %}
 ExecReload={{ systemd_service_ExecReload }}
