@@ -56,6 +56,7 @@ Role Variables
 |`systemd_service_Service_RestartSec`|Integer|| [Service]RestartSec
 |`systemd_service_Service_ExecReload`|String|| [Service]ExecReload
 |`systemd_service_Service_ExecStop`|String|| [Service]ExecStop
+|`systemd_service_Service_KillMode`|String|| [Service]KillMode
 |`systemd_service_Service_ExecStopPost`|String,List|| [Service]ExecStopPost
 |`systemd_service_Service_PIDFile`|String|| [Service]PIDFile
 |`systemd_service_Service_BusName`|String|| [Service]BusName
