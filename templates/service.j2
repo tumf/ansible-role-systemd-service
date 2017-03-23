@@ -45,8 +45,8 @@ Type={{ systemd_service_Service_Type }}
 {% if systemd_service_Service_User is defined %}
 User={{ systemd_service_Service_User }}
 {% endif -%}
-{% if systemd_service_Service_User is defined %}
-Group={{ systemd_service_Service_User }}
+{% if systemd_service_Service_Group is defined %}
+Group={{ systemd_service_Service_Group }}
 {% endif -%}
 
 {% if systemd_service_ExecReload is defined %}
