@@ -39,6 +39,7 @@ Role Variables
 |`systemd_service_Unit_Documentation`|String||[Unit]Documentation
 |`systemd_service_Unit_Requires`|String,List||[Unit]Requires
 |`systemd_service_Unit_Wants`|String,List||[Unit]Wants
+|`systemd_service_Unit_ConditionPathExists`|String||[Unit]ConditionPathExists
 |`systemd_service_Unit_After`|String,List||[Unit]After
 |`systemd_service_Unit_Before`|String,List||[Unit]Before
 
