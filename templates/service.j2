@@ -21,6 +21,12 @@ Wants={{ systemd_service_Unit_Wants | join(",") }}
 {% endif %}
 {% endif -%}
 
+{% if systemd_service_Unit_ConditionPathExists is defined %}
+{% if systemd_service_Unit_ConditionPathExists is string %}
+ConditionPathExists={{ systemd_service_Unit_ConditionPathExists }}
+{% endif -%}
+{% endif -%}
+
 {% if systemd_service_Unit_Before is defined %}
 {% if systemd_service_Unit_Before is string %}
 Before={{ systemd_service_Unit_Before }}
