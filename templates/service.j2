@@ -69,6 +69,11 @@ ExecStop={{ systemd_service_Service_ExecStop }}
 KillMode={{ systemd_service_Service_KillMode }}
 {% endif -%}
 
+{% if systemd_service_Service_EnvironmentFile is defined %}
+EnvironmentFile={{ systemd_service_Service_EnvironmentFile }}
+{% endif -%}
+
+
 {% if systemd_service_Service_ExecStartPre is defined %}
 {% if systemd_service_Service_ExecStartPre is string %}
 ExecStartPre={{ systemd_service_Service_ExecStartPre }}
