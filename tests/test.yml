@@ -67,6 +67,7 @@
       systemd_service_Service_PIDFile: pid
       systemd_service_Service_BusName: bus
       systemd_service_Service_PrivateTmp: tmp
+      systemd_service_Service_LimitNOFILE: 65536
       systemd_service_Install_WantedBy: wantedby
       systemd_service_Install_RequiredBy: requiredby
       systemd_service_Install_Also: also
