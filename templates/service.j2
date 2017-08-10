@@ -42,6 +42,10 @@ ExecStart={{ systemd_service_Service_ExecStart }}
 EnvironmentFile=-/etc/default/{{ systemd_service_name }}
 Type={{ systemd_service_Service_Type }}
 
+{% if systemd_service_Service_RemainAfterExit is defined %}
+RemainAfterExit={{ systemd_service_Service_RemainAfterExit }}
+{% endif -%}
+
 {% if systemd_service_ExecReload is defined %}
 ExecReload={{ systemd_service_ExecReload }}
 {% endif -%}
