@@ -1,16 +1,20 @@
 ---
 # tasks file for roles/systemd/service
 - file: state=directory path="{{ item }}" recurse=yes
+  become: yes
   with_items:
     - "{{ ansible_unit_test_prefix_dir }}{{ systemd_service_default_dir }}"
     - "{{ ansible_unit_test_prefix_dir }}{{ systemd_service_systemd_dir }}"
 
 - template: src="default.j2" dest="{{ ansible_unit_test_prefix_dir }}/{{ systemd_service_default_dir }}/{{ systemd_service_name }}"
+  become: yes
   notify: reload systemd
 
 - template: src="service.j2" dest="{{ ansible_unit_test_prefix_dir }}/{{ systemd_service_systemd_dir }}/{{ systemd_service_name }}.service"
+  become: yes
   register: service_file
   notify: reload systemd
 
 - shell: systemctl daemon-reload
+  become: yes
   when: service_file.changed and not ansible_unit_test
