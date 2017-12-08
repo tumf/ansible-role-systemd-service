@@ -1,5 +1,4 @@
 ---
-# tasks file for roles/systemd/service
 - name: create service directories
   file:
     state: directory
@@ -9,17 +8,19 @@
     - "{{ ansible_unit_test_prefix_dir }}{{ systemd_service_default_dir }}"
     - "{{ ansible_unit_test_prefix_dir }}{{ systemd_service_systemd_dir }}"
 
-- name: write default configuration for service
+- name: write default configuration for service(s)
   template:
     src: default.j2
-    dest: "{{ ansible_unit_test_prefix_dir }}/{{ systemd_service_default_dir }}/{{ systemd_service_name }}"
+    dest: "{{ ansible_unit_test_prefix_dir }}/{{ systemd_service_default_dir }}/{{ item.systemd_service_name }}"
+  with_items: "{{ systemd_service_units }}"
   notify: reload systemd
 
-- name: adds systemd entry for service
+- name: adds systemd entry for service(s)
   template:
     src: service.j2
-    dest: "{{ ansible_unit_test_prefix_dir }}/{{ systemd_service_systemd_dir }}/{{ systemd_service_name }}.service"
+    dest: "{{ ansible_unit_test_prefix_dir }}/{{ systemd_service_systemd_dir }}/{{ item.systemd_service_name }}.service"
   register: service_file
+  with_items: "{{ systemd_service_units }}"
   notify: reload systemd
 
 - name: reload systemctl manager configuration

@@ -1,131 +1,127 @@
 [Unit]
-Description={{ systemd_service_Unit_Description }}
+Description={{item.systemd_service_Unit_Description|default(item.systemd_service_name+' Service')}}
 
-{% if systemd_service_Unit_Documentation is defined %}
-Documentation={{ systemd_service_Unit_Documentation }}
+{% if item.systemd_service_Unit_Documentation is defined %}
+Documentation={{ item.systemd_service_Unit_Documentation }}
 {% endif -%}
 
-{% if systemd_service_Unit_Requires is defined %}
-{% if systemd_service_Unit_Requires is string %}
-Requires={{ systemd_service_Unit_Requires }}
+{% if item.systemd_service_Unit_Requires is defined %}
+{% if item.systemd_service_Unit_Requires is string %}
+Requires={{ item.systemd_service_Unit_Requires }}
 {% else %}
-Requires={{ systemd_service_Unit_Requires | join(",") }}
+Requires={{ item.systemd_service_Unit_Requires | join(",") }}
 {% endif %}
 {% endif -%}
 
-{% if systemd_service_Unit_Wants is defined %}
-{% if systemd_service_Unit_Wants is string %}
-Wants={{ systemd_service_Unit_Wants }}
+{% if item.systemd_service_Unit_Wants is defined %}
+{% if item.systemd_service_Unit_Wants is string %}
+Wants={{ item.systemd_service_Unit_Wants }}
 {% else %}
-Wants={{ systemd_service_Unit_Wants | join(",") }}
+Wants={{ item.systemd_service_Unit_Wants | join(",") }}
 {% endif %}
 {% endif -%}
 
-{% if systemd_service_Unit_ConditionPathExists is defined %}
-{% if systemd_service_Unit_ConditionPathExists is string %}
-ConditionPathExists={{ systemd_service_Unit_ConditionPathExists }}
+{% if item.systemd_service_Unit_ConditionPathExists is defined %}
+{% if item.systemd_service_Unit_ConditionPathExists is string %}
+ConditionPathExists={{ item.systemd_service_Unit_ConditionPathExists }}
 {% endif -%}
 {% endif -%}
 
-{% if systemd_service_Unit_Before is defined %}
-{% if systemd_service_Unit_Before is string %}
-Before={{ systemd_service_Unit_Before }}
+{% if item.systemd_service_Unit_Before is defined %}
+{% if item.systemd_service_Unit_Before is string %}
+Before={{ item.systemd_service_Unit_Before }}
 {% else %}
-Before={{ systemd_service_Unit_Before | join(",") }}
+Before={{ item.systemd_service_Unit_Before | join(",") }}
 {% endif %}
 {% endif -%}
 
-{% if systemd_service_Unit_After is defined %}
-{% if systemd_service_Unit_After is string %}
-After={{ systemd_service_Unit_After }}
+{% if item.systemd_service_Unit_After is defined %}
+{% if item.systemd_service_Unit_After is string %}
+After={{ item.systemd_service_Unit_After }}
 {% else %}
-After={{ systemd_service_Unit_After | join(",") }}
+After={{ item.systemd_service_Unit_After | join(",") }}
 {% endif %}
 {% endif -%}
 
 [Service]
-ExecStart={{ systemd_service_Service_ExecStart }}
-EnvironmentFile=-{{ systemd_service_default_dir }}/{{ systemd_service_name }}
-Type={{ systemd_service_Service_Type }}
+ExecStart={{ item.systemd_service_Service_ExecStart }}
+EnvironmentFile=-{{ systemd_service_default_dir }}/{{ item.systemd_service_name }}
+Type={{ item.systemd_service_Service_Type|default('simple') }}
 
-{% if systemd_service_Service_User is defined %}
-User={{ systemd_service_Service_User }}
+{% if item.systemd_service_Service_User is defined %}
+User={{ item.systemd_service_Service_User }}
 {% endif -%}
-{% if systemd_service_Service_Group is defined %}
-Group={{ systemd_service_Service_Group }}
+{% if item.systemd_service_Service_Group is defined %}
+Group={{ item.systemd_service_Service_Group }}
 {% endif -%}
-{% if systemd_service_Service_WorkingDirectory is defined %}
-WorkingDirectory={{ systemd_service_Service_WorkingDirectory }}
-{% endif -%}
-
-{% if systemd_service_ExecReload is defined %}
-ExecReload={{ systemd_service_ExecReload }}
+{% if item.systemd_service_Service_WorkingDirectory is defined %}
+WorkingDirectory={{ item.systemd_service_Service_WorkingDirectory }}
 {% endif -%}
 
-{% if systemd_service_Service_ExecStop is defined %}
-ExecStop={{ systemd_service_Service_ExecStop }}
-{% endif -%}
-{% if systemd_service_Service_KillMode is defined %}
-KillMode={{ systemd_service_Service_KillMode }}
+{% if item.systemd_service_ExecReload is defined %}
+ExecReload={{ item.systemd_service_ExecReload }}
 {% endif -%}
 
-{% if systemd_service_Service_ExecStartPre is defined %}
-{% if systemd_service_Service_ExecStartPre is string %}
-ExecStartPre={{ systemd_service_Service_ExecStartPre }}
-{% elif systemd_service_Service_ExecStartPre is iterable %}
-{% for i in systemd_service_Service_ExecStartPre %}
+{% if item.systemd_service_Service_ExecStop is defined %}
+ExecStop={{ item.systemd_service_Service_ExecStop }}
+{% endif -%}
+{% if item.systemd_service_Service_KillMode is defined %}
+KillMode={{ item.systemd_service_Service_KillMode }}
+{% endif -%}
+
+{% if item.systemd_service_Service_ExecStartPre is defined %}
+{% if item.systemd_service_Service_ExecStartPre is string %}
+ExecStartPre={{ item.systemd_service_Service_ExecStartPre }}
+{% elif item.systemd_service_Service_ExecStartPre is iterable %}
+{% for i in item.systemd_service_Service_ExecStartPre %}
 ExecStartPre={{ i }}
 {% endfor %}
 {% endif %}
 {% endif -%}
 
-{% if systemd_service_Service_ExecStartPost is defined -%}
-{% if systemd_service_Service_ExecStartPost is string -%}
-ExecStartPost={{ systemd_service_Service_ExecStartPost }}
-{% elif systemd_service_Service_ExecStartPost is iterable -%}
-{% for i in systemd_service_Service_ExecStartPost -%}
+{% if item.systemd_service_Service_ExecStartPost is defined -%}
+{% if item.systemd_service_Service_ExecStartPost is string -%}
+ExecStartPost={{ item.systemd_service_Service_ExecStartPost }}
+{% elif item.systemd_service_Service_ExecStartPost is iterable -%}
+{% for i in item.systemd_service_Service_ExecStartPost -%}
 ExecStartPost={{ i }}
 {% endfor %}
 {% endif %}
 {% endif -%}
 
-{% if systemd_service_Service_ExecStopPost is defined %}
-ExecStopPost={{ systemd_service_Service_ExecStopPost }}
+{% if item.systemd_service_Service_ExecStopPost is defined %}
+ExecStopPost={{ item.systemd_service_Service_ExecStopPost }}
 {% endif -%}
 
-{% if systemd_service_Service_PIDFile is defined %}
-PIDFile={{ systemd_service_Service_PIDFile }}
+{% if item.systemd_service_Service_PIDFile is defined %}
+PIDFile={{ item.systemd_service_Service_PIDFile }}
 {% endif %}
-{% if systemd_service_Service_BusName is defined %}
-BusName={{ systemd_service_Service_BusName }}
+{% if item.systemd_service_Service_BusName is defined %}
+BusName={{ item.systemd_service_Service_BusName }}
 {% endif %}
-{% if systemd_service_Service_Restart is defined %}
-Restart={{ systemd_service_Service_Restart }}
+Restart={{ item.systemd_service_Service_Restart|default('no') }}
+{% if item.systemd_service_Service_RestartSec is defined %}
+RestartSec={{ item.systemd_service_Service_RestartSec }}
 {% endif %}
-{% if systemd_service_Service_RestartSec is defined %}
-RestartSec={{ systemd_service_Service_RestartSec }}
-{% endif %}
-{% if systemd_service_Service_PrivateTmp is defined %}
-PrivateTmp={{ systemd_service_Service_PrivateTmp }}
+{% if item.systemd_service_Service_PrivateTmp is defined %}
+PrivateTmp={{ item.systemd_service_Service_PrivateTmp }}
 {% endif -%}
 
-{% if systemd_service_Service_LimitNOFILE is defined %}
-LimitNOFILE={{ systemd_service_Service_LimitNOFILE }}
+{% if item.systemd_service_Service_LimitNOFILE is defined %}
+LimitNOFILE={{ item.systemd_service_Service_LimitNOFILE }}
 {% endif -%}
 
 [Install]
-{% if systemd_service_Install_WantedBy is defined %}
-WantedBy={{ systemd_service_Install_WantedBy }}
+WantedBy={{ item.systemd_service_Install_WantedBy|default('multi-user.target') }}
+
+{% if item.systemd_service_Install_RequiredBy is defined %}
+RequiredBy={{ item.systemd_service_Install_RequiredBy }}
 {% endif -%}
 
-{% if systemd_service_Install_RequiredBy is defined %}
-RequiredBy={{ systemd_service_Install_RequiredBy }}
+{% if item.systemd_service_Install_Also is defined %}
+Also={{ item.systemd_service_Install_Also }}
 {% endif -%}
 
-{% if systemd_service_Install_Also is defined %}
-Also={{ systemd_service_Install_Also }}
-{% endif -%}
-
-{% if systemd_service_Install_Alias is defined %}
-Alias={{ systemd_service_Install_Alias }}
+{% if item.systemd_service_Install_Alias is defined %}
+Alias={{ item.systemd_service_Install_Alias }}
 {% endif %}
