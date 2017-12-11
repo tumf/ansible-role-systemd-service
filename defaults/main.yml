@@ -6,8 +6,5 @@ ansible_unit_test_prefix_dir: ""
 systemd_service_root_dir: "{{ ansible_unit_test_prefix_dir }}"
 systemd_service_default_dir: "/etc/default"
 systemd_service_systemd_dir: "/etc/systemd/system"
-systemd_service_envs: []
-systemd_service_Unit_Description: "{{ systemd_service_name }} Service"
-systemd_service_Service_Type: simple
-systemd_service_Install_WantedBy: multi-user.target
-systemd_service_Restart: no
+
+systemd_service_units: []

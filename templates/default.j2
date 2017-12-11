@@ -1,4 +1,4 @@
-{% for i in systemd_service_envs %}
+{% for i in item.systemd_service_envs|default([]) %}
 {% if i is string  %}
 {{ i }}
 {% elif i is mapping %}
