@@ -5,3 +5,4 @@
     name: "{{ systemd_service_name }}"
     state: restarted
   when: not ansible_unit_test
+  become: yes
