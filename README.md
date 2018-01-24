@@ -42,7 +42,7 @@ Role Variables
 |`systemd_service_Unit_ConditionPathExists`|String||[Unit]ConditionPathExists
 |`systemd_service_Unit_After`|String,List||[Unit]After
 |`systemd_service_Unit_Before`|String,List||[Unit]Before
-
+|`systemd_service_Unit_PartOf`|String,List||[Unit]PartOf
 
 ### [Service]
 
