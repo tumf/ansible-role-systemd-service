@@ -113,6 +113,16 @@ PrivateTmp={{ systemd_service_Service_PrivateTmp }}
 LimitNOFILE={{ systemd_service_Service_LimitNOFILE }}
 {% endif -%}
 
+{% if systemd_service_Service_StandardOutput is defined %}
+StandardOutput={{ systemd_service_Service_StandardOutput }}
+{% endif -%}
+{% if systemd_service_Service_StandardError is defined %}
+StandardError={{ systemd_service_Service_StandardError }}
+{% endif -%}
+{% if systemd_service_Service_SyslogIdentifier is defined %}
+SyslogIdentifier={{ systemd_service_Service_SyslogIdentifier }}
+{% endif -%}
+
 [Install]
 {% if systemd_service_Install_WantedBy is defined %}
 WantedBy={{ systemd_service_Install_WantedBy }}

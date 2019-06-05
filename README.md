@@ -64,6 +64,9 @@ Role Variables
 |`systemd_service_Service_PrivateTmp`|String|| [Service]PrivateTmp
 |`systemd_service_Service_LimitNOFILE`|String|| [Service]LimitNOFILE
 |`systemd_service_Service_User`|String|| [Service]User
+|`systemd_service_Service_StandardOutput`|String|| [Service]StandardOutput
+|`systemd_service_Service_StandardError`|String|| [Service]StandardError
+|`systemd_service_Service_SyslogIdentifier`|String|| [Service]SyslogIdentifier
 |`systemd_service_Service_Group`|String|| [Service]Group
 |`systemd_service_Service_WorkingDirectory`|String|| [Service]WorkingDirectory
 
