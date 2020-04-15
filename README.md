@@ -19,6 +19,10 @@ Install
 Role Variables
 --------------
 
+All systemd services are defined as list of dictionaries under `systemd_service_units`.
+Below are the relevant fields required.
+
+
 |name                |type    |default|description
 |--------------------|--------|-------|-------------
 |`systemd_service_default_dir`|String|"/etc/default"|envs file path
@@ -87,17 +91,18 @@ Example Playbook
     - hosts: servers
       roles:
         - role: systemd-service
-          systemd_service_name: "swarm-manager"
-          systemd_service_envs:
-              - "DOCKER_HOST=tcp://127.0.0.1:2375"
-          systemd_service_Unit_Description: Docker Swarm Manager
-          systemd_service_Unit_Requires: docker.service
-          systemd_service_Unit_After: docker.service
-          systemd_service_Service_ExecStartPre:
-              - -/usr/bin/docker stop swarm-manager
-              - -/usr/bin/docker rm swarm-manager
-              - /usr/bin/docker pull swarm
-          systemd_service_Service_ExecStart: /usr/bin/docker run -p 2377:2375 --name swarm-manager swarm manage
+          systemd_service_units:
+            - systemd_service_name: "swarm-manager"
+              systemd_service_envs:
+                - "DOCKER_HOST=tcp://127.0.0.1:2375"
+              systemd_service_Unit_Description: Docker Swarm Manager
+              systemd_service_Unit_Requires: docker.service
+              systemd_service_Unit_After: docker.service
+              systemd_service_Service_ExecStartPre:
+                - -/usr/bin/docker stop swarm-manager
+                - -/usr/bin/docker rm swarm-manager
+                - /usr/bin/docker pull swarm
+              systemd_service_Service_ExecStart: /usr/bin/docker run -p 2377:2375 --name swarm-manager swarm manage
 
 License
 -------
